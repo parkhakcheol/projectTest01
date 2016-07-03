@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script> 
+<script>
+	//윈도우 로드시
+	$(document).ready(function(){
+		// 학생ID에 포커스
+		$('#s_id').focus();
+		// 등록버튼 클릭시
+		$('#s_insert').click(function(){
+			//아이디가 공백이거나 숫자가 아니거나 음수라면
+			if($('#s_id').val() == '' || $('#s_id').val() < 0){
+				//아이디 오류 화면출력
+				$('#idHelper').text('아이디 오류');
+				//아이디에 포커스
+				$('#s_id').focus();
+			//이름이 공백이거나 숫자거나 2자미만이라면
+			}else if($('#s_pw').val() == '' || !(isNaN($('#s_pw').val())) || $('#s_pw').val().length < 2){
+				$('#idHelper').text('');
+				// 오류 화면 출력
+				$('#pwHelper').text('이름 오류');
+				$('#s_pw').focus();
+			}else if($('#s_age').val() == '' || isNaN($('#s_age').val())){
+				$('#pwHelper').text('');
+				$('#ageHelper').text('나이 오류');
+				$('#s_age').focus();
+			}else if($('#s_group').val() == ''){
+				$('#ageHelper').text('');
+				$('#groupHelper').text('그룹을 입력하세요.');
+				$('#s_group').focus();
+			}else{
+				$('#groupHelper').text('');
+				$('#addForm').submit();
+			}
+		});
+		
+		
+	});
+</script>
+</head>
+<body>
+<!-- 입력 폼  -->
+	<h1>학생 입력</h1>
+	<!-- submit하면 addStudentAction.jsp로 포스트방식으로 값을가지고 이동  -->
+	<form id="addForm" action="./insertAction.jsp" method="post">
+		<div>
+			<label>ID</label>
+			<input type="text" id="s_id" name="s_id"/>
+			<span id="idHelper"></span>
+		</div>
+		<div>
+			<label>PW</label>
+			<input type="text" id="s_pw"name="s_pw"/>
+			<span id="pwHelper"></span>
+		</div>
+		<div>
+			<label>나이</label>
+			<input type="text" id="s_age" name="s_age"/>
+			<span id="ageHelper"></span>
+		</div>
+		<div>
+			<label>클래스</label>
+			<input type="text" id="s_group" name="s_group"/>
+			<span id="groupHelper"></span>
+		</div>
+		<div>
+			<input type="button" id="s_insert" value="등록"/>
+		</div>
+	
+	</form>
+
+</body>
+</html>
